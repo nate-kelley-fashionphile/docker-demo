@@ -66,6 +66,16 @@ services:
     networks:
       - frontend
 
+  static_ui:
+    image: "static_ui"
+    container_name: static_ui
+    build:
+      context: ./static_ui
+    volumes:
+      - ./:/home/node/staticapp
+    networks:
+      - frontend
+
 networks:
   frontend:
       driver: bridge
