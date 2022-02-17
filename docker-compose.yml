@@ -1,0 +1,77 @@
+version: "3.8"
+
+services:
+  nginx:
+    build:
+      context: ./nginx
+    volumes:
+       - .:/usr/share/nginx/html
+    ports:
+      - 80:80
+    networks:
+      - frontend
+
+  node_16_api:
+    image: "node_16_api"
+    ports:
+      - "3000:3000"
+    build:
+      context: ./node_16_api
+
+  node_17_typescript_api:
+    image: "node_17_typescript_api"
+    ports:
+      - "3001:3000"
+    build:
+      context: ./node_17_api_typescript
+    container_name: ts-node-api
+
+  go_lang_api:
+    image: "go_lang_api"
+    ports:
+      - "3002:8080"
+    build:
+      context: ./golang_api
+
+  python_api:
+    image: "python_api"
+    ports:
+      - "3003:5000"
+    build:
+      context: ./python_api
+    volumes:
+      - ./:/home/node/python_api
+
+  vue3_ui:
+    image: "vue3_ui"
+    ports:
+      - "8080:8080"
+    build:
+      context: ./vue3_ui
+    container_name: vue3_ui
+    volumes:
+      - ./:/home/node/vueapp
+    networks:
+      - frontend
+
+  react_ui:
+    image: "react_ui"
+    ports:
+      - "8081:8080"
+    container_name: react_ui
+    build:
+      context: ./react_ui
+    volumes:
+      - ./:/home/node/reactapp
+    networks:
+      - frontend
+
+networks:
+  frontend:
+      driver: bridge
+      
+
+
+
+
+      
