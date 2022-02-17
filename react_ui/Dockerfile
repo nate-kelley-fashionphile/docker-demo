@@ -7,7 +7,7 @@ COPY package*.json ./
 RUN npm install
 
 # build app for production with minification
-COPY ./. ./
+COPY . .
 RUN npm run build
 
 # Create Server And Serve App
